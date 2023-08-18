@@ -12,8 +12,8 @@ const sessionSecretKey = '5d9f843a8b1f9ec16f32d7b0c6be029a147d1e783b8b4e7f36c0f5
 const db_params = {
     user: 'postgres',
     host: 'localhost',
-    database: 'users',
-    password: '12345678',
+    database: '',
+    password: '',
     port: 5432,
 };
 
