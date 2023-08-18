@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="favicon.ico">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="styles2.css">
+<title>Main page</title>
+</head>
+<body>
+  <a href="/kabinet.html" class="button">Перейти в личный кабинет</a>
+<div class="vpn-container">
+  <header>
+    <h1>Преимущества товара1</h1>
+    <p>Защитите свою конфиденциальность в Интернете и получите доступ к контенту с ограниченным доступом из любого места.</p>
+  </header>
+  <div class="vpn-features">
+    <div class="feature">
+      <img src="1.png" alt="Security Icon">
+      <h2>Преимущества товара2</h2>
+      <p>Описание преимуществ</p><br>
+      <p>Описание преимуществ</p>
+    </div>
+    <div class="feature">
+      <img src="2.png" alt="Access Icon">
+      <h2>Преимущества товара3</h2>
+      <p>Описание приемуществ</p><br>
+      <p>Описание преимуществ</p>
+    </div>
+  </div>
+  <div class="vpn-pricing">
+    <h2>Выберите время подписки и локацию VPN:</h2>
+
+    <div class="slidecontainer">
+      <input type="range" min="1" max="30" value="7" class="slider" id="myRange">
+      <p>Подписка: <span id="subscriptionTime">7</span> <span id="daysText">дней</span></p>
+    </div>
+    
+    <div class="btn-group">
+      <a href="http://example.com/" class="btn-support" target="_blank">Необходимые ссылки</a>
+      <a class="btn-purchase" id="payment-button">Перейти к оплате</a>
+      <a href="http://example.com/" class="btn-vk" target="_blank">Необходимые ссылки</a>
+        <div id="payment-popup" class="popup">
+        <div class="popup-content">
+          <h3>Выбрать метод оплаты:</h3>
+          <button id="payment1">Способ оплаты 1</button>   
+          <button id="payment2">Способ оплаты 2</button>
+          <button id="payment3">Способ оплаты 3</button>
+          <button id="payment4">Способ оплаты 4</button>
+          <button id="payment5">Способ оплаты 5</button>               
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <p>&copy; Права защищены</p>
+</footer>
+</div>
+<script src="script.js"></script>
+<script>
+  
+  var slider = document.getElementById("myRange");
+var output = document.getElementById("subscriptionTime");
+var daysText = document.getElementById("daysText");
+
+output.innerHTML = slider.value;
+updateDaysText(slider.value);
+
+slider.oninput = function() {
+  output.innerHTML = this.value;
+  updateDaysText(this.value);
+};
+
+function updateDaysText(days) {
+  var lastDigit = days % 10;
+  var daysString = "дней";
+
+  if (days < 10 || days > 20) {
+    if (lastDigit === 1) {
+      daysString = "день";
+    } else if (lastDigit >= 2 && lastDigit <= 4) {
+      daysString = "дня";
+    }
+  }
+
+  daysText.textContent = daysString;
+}
+
+</script>
+<script>
+
+document.getElementById("payment-button").addEventListener("click", function() {
+  document.getElementById("payment-popup").style.display = "block";
+});
+
+document.getElementById("payment1").addEventListener("click", function() {
+  window.open('http://example.com/', '_blank');
+});
+
+document.getElementById("payment2").addEventListener("click", function() {
+  window.open('http://example.com/', '_blank');
+});
+
+document.getElementById("payment3").addEventListener("click", function() {
+  window.open('http://example.com/', '_blank');
+});
+
+document.getElementById("payment4").addEventListener("click", function() {
+  window.open('http://example.com/', '_blank');
+});
+
+document.getElementById("payment5").addEventListener("click", function() {
+  window.open('http://example.com/', '_blank');
+});
+
+var popup = document.getElementById("payment-popup");
+    window.addEventListener("click", function(event) {
+        if (event.target === popup) {
+            popup.style.display = "none";
+        }
+    });
+  </script>
+<script>
+  function closePopup() {
+    var popup = document.getElementById("payment-popup");
+    popup.style.display = "none";
+  }
+
+  document.addEventListener("click", function(event) {
+    var popup = document.getElementById("payment-popup");
+    var popupContent = document.querySelector(".popup-content");
+
+    if (popup.style.display === "block" && !popupContent.contains(event.target)) {
+      closePopup();
+    }
+  });
+
+  document.getElementById("payment-button").addEventListener("click", function(event) {
+    event.stopPropagation();
+    document.getElementById("payment-popup").style.display = "block";
+  });
+</script>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const paymentButton = document.getElementById("payment-button");
+      const radioButtons = document.querySelectorAll("input[type='radio'][name='location']");
+      const notification = document.getElementById("notification");
+
+      paymentButton.addEventListener("click", function(event) {
+        const selectedRadioButton = Array.from(radioButtons).find(radioButton => radioButton.checked);
+
+        if (!selectedRadioButton) {
+          event.preventDefault();
+          notification.style.display = "block";
+          notification.innerText = "Перед оплатой выберите локацию!";
+          setTimeout(function() {
+            notification.style.display = "none";
+          }, 2000);
+        }
+      });
+
+      radioButtons.forEach(radioButton => {
+        radioButton.addEventListener("change", function() {
+          radioButtons.forEach(rb => {
+            rb.parentNode.classList.remove("selected");
+          });
+          radioButton.parentNode.classList.add("selected");
+          paymentButton.disabled = false;
+        });
+      });
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+    fetch('/get-user-data')
+        .then(response => response.json())
+        .then(data => {
+            if (!data.username) {
+                window.location.href = '/index.html';
+            }
+        });
+
+});
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="favicon.ico">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="styles.css">
+<title>Change Password</title>
+</head>
+<body>
+<div class="login-container">
+  <div class="login-form">
+    <h2>Смена пароля</h2>
+    <input type="password" id="oldPassword" placeholder="Старый пароль">
+    <input type="password" id="newPassword" placeholder="Новый пароль">
+    <input type="password" id="confirmNewPassword" placeholder="Подтвердите новый пароль">
+    <div class="center">
+      <button class="111" id="changePassword">Изменить пароль</button>
+    </div>
+    <div class="options">
+      <a href="kabinet.html">Вернуться в личный кабинет</a>
+    </div>
+  </div>
+</div>
+<script src="script.js"></script>
+<script>
+    document.getElementById("r-password").addEventListener("click", function() {
+      window.location.href = "kabinet.html";
+    });
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+  const changePasswordButton = document.getElementById('changePassword');
+  changePasswordButton.addEventListener('click', async function () {
+    const oldPassword = document.getElementById('oldPassword').value;
+    const newPassword = document.getElementById('newPassword').value;
+    const confirmNewPassword = document.getElementById('confirmNewPassword').value;
+
+    if (newPassword !== confirmNewPassword) {
+      alert('Новые пароли не совпадают');
+      return;
+    }
+
+    const response = await fetch('/change-password', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ oldPassword, newPassword }),
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      alert(data.message);
+      window.location.href = "kabinet.html";
+    } else {
+      alert(data.message);
+    }
+  });
+
+});
+
+    </script>
+</body>
+</html>

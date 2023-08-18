@@ -1,0 +1,151 @@
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f2f2f2;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+h1 {
+  color: #333;
+  font-size: 36px;
+  margin: 0;
+}
+
+p {
+  color: #777;
+  font-size: 18px;
+  margin: 15px 0;
+}
+
+.account-info, .account-actions {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.account-info h2, .account-actions h2 {
+  color: #333;
+  font-size: 24px;
+  margin: 0 0 15px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  margin-bottom: 15px;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  text-align: center;
+  color: #777;
+  font-size: 14px;
+}
+
+.button {
+  position: fixed;
+  top: -10px;
+  right: 10px;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.vpn-container {
+  text-align: center;
+}
+
+.lichi {
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  p {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+
+  .account-info,
+  .account-actions {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .account-info h2,
+  .account-actions h2 {
+    font-size: 20px;
+    margin: 0 0 10px;
+  }
+
+  ul {
+    padding-left: 20px;
+  }
+
+  li {
+    margin-bottom: 10px;
+  }
+
+  footer {
+    font-size: 12px;
+  }
+
+  .button {
+    position: static;
+    display: block;
+    margin: 10px auto;
+  }
+}
+
+body {
+  transform: translateY(-150%);
+  animation: ani 1s forwards;
+}
+
+@keyframes ani {
+  0% {transform: translateY(-150%);}
+  100% {transform: translateY(0);}
+}

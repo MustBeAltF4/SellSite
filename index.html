@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="favicon.ico">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="styles.css">
+<title>Login</title>
+</head>
+<body>
+<div class="login-container">
+  <div class="login-form">
+    <h2>Вход в аккаунт</h2>
+    <input type="email" id="email" placeholder="Почта">
+    <input type="password" id="password" placeholder="Пароль">
+    <div class="center">
+      <button class="login-btn" id="login-btn">Войти</button>
+      <label class="keeplogin">
+        <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" />
+        <span class="checkmark"></span>
+        <p class="remember">Запомнить меня</p>
+      </label>
+    </div>
+    <div class="options">
+      <a href="register.html">Зарегистрироваться</a>
+      <a href="parol.html">Забыли пароль?</a>
+    </div>
+  </div>
+</div>
+<script src="script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const loginButton = document.getElementById('login-btn');
+    loginButton.addEventListener('click', async function () {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        const response = await fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+
+            alert(data.message);
+
+            window.location.href = "vpn.html";
+        } else {
+
+            alert(data.message);
+        }
+    });
+});
+
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const loginButton = document.getElementById('login-btn');
+    const rememberMeCheckbox = document.getElementById('loginkeeping');
+
+    const savedEmail = getCookie('rememberedEmail');
+    const savedPassword = getCookie('rememberedPassword');
+
+    if (savedEmail && savedPassword) {
+        document.getElementById('email').value = savedEmail;
+        document.getElementById('password').value = savedPassword;
+    }
+
+    loginButton.addEventListener('click', async function () {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        if (rememberMeCheckbox.checked) {
+
+            setCookie('rememberedEmail', email, 30); 
+            setCookie('rememberedPassword', password, 30);
+        } else {
+
+            deleteCookie('rememberedEmail');
+            deleteCookie('rememberedPassword');
+        }
+
+    });
+
+
+    function setCookie(name, value, days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        const expires = 'expires=' + date.toUTCString();
+        document.cookie = name + '=' + value + ';' + expires + ';path=/';
+    }
+
+    function getCookie(name) {
+        const cookieName = name + '=';
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i];
+            while (cookie.charAt(0) == ' ') {
+                cookie = cookie.substring(1);
+            }
+            if (cookie.indexOf(cookieName) == 0) {
+                return cookie.substring(cookieName.length, cookie.length);
+            }
+        }
+        return '';
+    }
+
+    function deleteCookie(name) {
+        document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+    }
+});
+
+</script>
+</body>
+</html>
